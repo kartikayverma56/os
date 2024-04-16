@@ -1,0 +1,541 @@
+1) greatest of 3
+#!/bin/bash
+clear
+
+# Prompt the user to enter the first number
+read -p "Enter first number: " num1
+
+# Prompt the user to enter the second number
+read -p "Enter second number: " num2
+
+# Prompt the user to enter the third number
+read -p "Enter third number: " num3
+
+# Use if-else statement to find the greatest number
+if (( num1 > num2 && num1 > num3 )); then
+greatest=$num1
+elif (( num2 > num3 )); then
+greatest=$num2
+else
+greatest=$num3
+fi
+# Print the greatest number
+echo "The greatest number is: $greatest"
+
+
+
+
+2) check even/odd
+#!/bin/bash
+clear
+
+# Prompt the user to enter a number
+read -p "Enter a number: " num
+
+# Use if-else statement to check if the number is even or odd
+if (( num % 2 == 0 )); then
+echo "The number $num is even."
+else
+echo "The number $num is odd."
+fi
+
+
+3) calculate net salary
+
+#!/bin/bash
+clear
+
+# Prompt the user to enter the basic salary
+read -p "Enter basic salary: " bsalary
+
+# Prompt the user to enter the HRA percentage
+read -p "Enter HRA percentage: " hra
+
+# Prompt the user to enter the PF percentage
+read -p "Enter PF percentage: " pf
+
+# Prompt the user to enter the income tax percentage
+read -p "Enter income tax percentage: " tax
+
+# Calculate the net salary
+net_salary=$(echo "scale=2; ($bsalary * 100) - ($bsalary * $hra / 100) - ($bsalary * $pf / 100) - ($bsalary * $tax / 100)" | bc)
+
+# Print the net salary
+echo "Net Salary: $net_salary"
+
+
+4) PRINT AVG of 3 numbers using cmmand line
+#!/bin/bash
+# Check if there are exactly 3 arguments
+if [ "$#" -ne 3 ]; then
+echo "Usage: $0 num1 num2 num3"
+exit 1
+fi
+# Assign command line arguments to variables
+num1=$1
+num2=$2
+num3=$3
+# Calculate the average
+avg=$(echo "($num1 + $num2 + $num3) / 3" | bc)
+
+# Print the average
+echo "The average of $num1, $num2, and $num3 is: $avg"
+
+5)table
+#!/bin/bash
+# Check if there is exactly 1 argument
+if [ "$#" -ne 1 ]; then
+echo "Usage: $0 number"
+exit 1
+fi
+# Assign the command line argument to a variable
+num=$1
+# Print the multiplication table
+echo "Table of $num:"
+for i in {1..10}; do
+echo "$num * $i = $(($num * $i))"
+done
+
+6)leap year
+#!/bin/bash
+clear
+
+# Prompt the user to enter a year
+read -p "Enter a year: " year
+
+# Check if the year is a leap year
+if (( (year % 4 == 0 && year % 100 != 0) || year % 400 == 0 )); then
+echo "The year $year is a leap year."
+else
+echo "The year $year is not a leap year."
+fi
+
+7)length of a string
+#!/bin/bash
+clear
+
+# Prompt the user to enter a string
+read -p "Enter a string: " str
+
+# Calculate the length of the string
+length=${#str}
+# Print the length of the string
+echo "The length of the string \"$str\" is $length characters."
+
+8)prime btw two numbers
+#!/bin/bash
+clear
+
+# Prompt the user to enter the starting and ending numbers
+read -p "Enter the starting number: " start
+read -p "Enter the ending number: " end
+
+# Function to check if a number is prime
+is_prime() {
+    local num=$1
+if (( num < 2 )); then
+return 1
+    fi
+for (( i=2; i<=sqrt(num); i++ )); do
+if (( num % i == 0 )); then
+return 1
+        fi
+done
+return 0
+}
+
+# Print all prime numbers between the given range
+for (( num=start; num<=end; num++ )); do
+if is_prime "$num"; then
+echo "$num"
+fi
+done
+
+9)sum of a series
+#!/bin/bash
+clear
+
+# Prompt the user to enter the first term, common difference, and number of terms
+read -p "Enter the first term (a): " a
+read -p "Enter the common difference (d): " d
+read -p "Enter the number of terms (n): " n
+
+# Calculate the sum of the series using the arithmetic progression formula
+sum=$(echo "scale=2; $n * ($a + (($a + ($n - 1) * $d)) / 2)" | bc)
+
+# Print the sum of the series
+echo "The sum of the series is: $sum"
+
+
+10)reve
+#!/bin/bash
+clear
+
+# Prompt the user to enter a string
+read -p "Enter a string: " str
+
+# Reverse the string
+reverse=$(echo "$str" | rev)
+
+# Check if the original string and the reversed string are equal
+if [[ $str == $reverse ]]; then
+echo "The string is a palindrome."
+else
+echo "The string is not a palindrome."
+fi
+
+
+11)calculator
+#!/bin/bash
+clear
+
+echo "Simple Calculator"
+echo "1. Add"
+echo "2. Subtract"
+echo "3. Multiply"
+echo "4. Divide"
+echo "5. Exit"
+while true; do
+echo -n "Enter your choice: "
+read choice
+
+    case "$choice" in
+1)
+            echo -n "Enter first number: "
+read num1
+            echo -n "Enter second number: "
+read num2
+            echo "Result of addition is: $(($num1 + $num2))"
+;;
+        2)
+            echo -n "Enter first number: "
+read num1
+            echo -n "Enter second number: "
+read num2
+            echo "Result of subtraction is: $(($num1 - $num2))"
+;;
+        3)
+            echo -n "Enter first number: "
+read num1
+            echo -n "Enter second number: "
+read num2
+            echo "Result of multiplication is: $(($num1 * $num2))"
+;;
+        4)
+            echo -n "Enter first number: "
+read num1
+            echo -n "Enter second number: "
+read num2
+            if (( num2 != 0 )); then
+echo "Result of division is: $(($num1 / $num2))"
+else
+echo "Cannot divide by zero"
+fi
+;;
+        5)
+            echo "Exiting the calculator"
+break
+;;
+        *)
+            echo "Invalid choice. Please select a valid option."
+;;
+    esac
+done
+
+
+12) given task
+#!/bin/bash
+clear
+
+while true; do
+echo "Task Menu:"
+echo "1. Display directory content"
+echo "2. Get current directory name"
+echo "3. List logged-in users"
+echo "4. Get long listing of directory contents"
+echo "5. Count logged-in users"
+echo "6. Exit"
+echo -n "Enter your choice: "
+read choice
+
+    case "$choice" in
+1)
+            clear
+            ls
+echo "Press Enter to continue..."
+read
+;;
+        2)
+            clear
+            echo "The current directory is: $(pwd)"
+echo "Press Enter to continue..."
+read
+;;
+        3)
+            clear
+            who
+echo "Press Enter to continue..."
+read
+;;
+        4)
+            clear
+            ls -l
+            echo "Press Enter to continue..."
+read
+;;
+        5)
+            clear
+            users=$(who | wc -l)
+            echo "There are $users logged-in users."
+echo "Press Enter to continue..."
+read
+;;
+        6)
+            echo "Exiting the program"
+break
+;;
+        *)
+            echo "Invalid choice. Please select a valid option."
+;;
+    esac
+done
+
+13)fibonacci series
+#!/bin/bash
+clear
+
+echo "Fibonacci Series Generator"
+echo "------------------------"
+# Prompt the user to enter the limit
+read -p "Enter the limit: " limit
+# Function to generate the Fibonacci series up to the given limit
+generate_fibonacci() {
+    local a=0
+    local b=1
+    local next
+    echo -n "Fibonacci series up to $limit: $a $b "
+while (( $a <= limit )); do
+next=$((a + b))
+        echo -n " $next"
+a=$b
+b=$next
+done
+echo
+}
+
+# Call the function with the given limit
+generate_fibonacci $limit
+
+14)sort the contents of a file
+
+#!/bin/bash
+clear
+
+echo "File Sorter"
+echo "----------"
+# Prompt the user to enter the file name
+read -p "Enter the file name: " file
+
+# Verify that the file exists
+if [[ ! -f "$file" ]]; then
+echo "File does not exist."
+exit 1
+fi
+# Prompt the user to choose sorting order
+read -p "Enter 1 for ascending or 2 for descending order: " order
+
+# Sort the file contents based on the chosen order
+case $order in
+1) sort -n < "$file" ;;
+    2) sort -nr < "$file" ;;
+    *) echo "Invalid choice. Exiting the program."; exit 1 ;;
+esac
+# Print the sorted contents
+echo "Sorted contents:"
+echo "----------------"
+sort -n < "$file"
+
+
+15)
+translate
+
+#!/bin/bash
+clear
+
+# Verify that a file name was provided
+if [[ -z "$1" ]]; then
+echo "Usage: $0 filename"
+exit 1
+fi
+# Verify that the file exists
+if [[ ! -f "$1" ]]; then
+echo "File \"$1\" does not exist."
+exit 1
+fi
+# Convert the file contents to uppercase
+uppercase=$(tr '[:lower:]' '[:upper:]' < "$1")
+
+# Print the converted contents
+echo "Converted contents:"
+echo "------------------"
+echo "$uppercase"
+
+
+16)d to b
+
+#!/bin/bash
+clear
+
+echo "Decimal to Binary Converter"
+echo "--------------------------"
+# Prompt the user to enter a decimal number
+read -p "Enter the decimal number: " decimal
+
+# Verify that the input is a positive integer
+if [[ ! $decimal =~ ^[0-9]+$ ]]; then
+echo "Error: Please provide a positive decimal number."
+exit 1
+fi
+# Convert decimal to binary using the built-in `bc` command
+binary=$(echo "obase=2;$decimal" | bc)
+
+# Print the binary representation
+echo "Binary representation of $decimal: $binary"
+
+
+17)arm
+#!/bin/bash
+clear
+
+echo "Armstrong Number Checker"
+echo "------------------------"
+# Prompt the user to enter a number
+read -p "Enter a number: " number
+
+# Extract the number's last digit and convert it to an integer
+last_digit=$(echo "$number" | tail -c 1)
+last_digit=$(printf "%d\n" "$last_digit")
+
+# Remove the last digit from the number
+number="${number%?}"
+# Calculate the power to which each digit will be raised
+power=$(printf "%s\n" "${#number}")
+
+# Check if the number is an Armstrong number
+if (( $(echo "$number" | sed -e 's/./\0*\1/g' | bc) + $(echo "$last_digit*$last_digit" | bc) == $number )); then
+echo "The number is an Armstrong number."
+else
+echo "The number is not an Armstrong number."
+fi
+
+
+18)binary search
+
+#!/bin/bash
+clear
+
+echo "Binary Search"
+echo "-------------"
+# Prompt the user to enter the number of elements in the list
+read -p "Enter the number of elements in the list: " num_elements
+
+# Initialize the list array
+list=()
+
+# Prompt the user to enter the sorted list of numbers
+for (( i=0; i<num_elements; i++ )); do
+read -p "Enter element $((i+1)): " num
+    list+=($num)
+done
+# Prompt the user to enter the target number
+read -p "Enter the target number: " target
+
+# Perform binary search on the list
+low=0
+high=$((num_elements - 1))
+
+while (( low <= high )); do
+mid=$(((low + high) / 2))
+    if (( target == list[mid] )); then
+echo "Element found at index: $mid"
+exit 0
+    elif (( target < list[mid] )); then
+high=$((mid - 1))
+    else
+low=$((mid + 1))
+    fi
+done
+echo "Element not found"
+
+19)linear search
+#!/bin/bash
+clear
+
+echo "Linear Search"
+echo "------------"
+# Prompt the user to enter the number of elements in the list
+read -p "Enter the number of elements in the list: " num_elements
+
+# Initialize the list array
+list=()
+
+# Prompt the user to enter the list of numbers
+for (( i=0; i<num_elements; i++ )); do
+read -p "Enter element $((i+1)): " num
+    list+=($num)
+done
+# Prompt the user to enter the target number
+read -p "Enter the target number: " target
+
+# Perform linear search on the list
+found=false
+for (( j=0; j<num_elements; j++ )); do
+if (( list[j] == target )); then
+echo "Element found at index: $j"
+found=true
+break
+fi
+done
+if [[ "$found" == "false" ]]; then
+echo "Element not found"
+fi
+
+
+20) selection sort 
+
+#!/bin/bash
+clear
+
+echo "Selection Sort"
+echo "-------------"
+# Prompt the user to enter the number of elements in the list
+read -p "Enter the number of elements in the list: " num_elements
+
+# Initialize the list array
+list=()
+
+# Prompt the user to enter the list of numbers
+for (( i=0; i<num_elements; i++ )); do
+read -p "Enter element $((i+1)): " num
+    list+=($num)
+done
+# Perform selection sort on the list
+for (( i=0; i<num_elements-1; i++ )); do
+min_index=$i
+for (( j=i+1; j<num_elements; j++ )); do
+if (( list[j] < list[min_index] )); then
+min_index=$j
+fi
+done
+if (( min_index != i )); then
+temp=list[i]
+        list[i]=list[min_index]
+        list[min_index]=temp
+    fi
+done
+# Print the sorted list
+echo "Sorted list:"
+echo "------------"
+for item in "${list[@]}"; do
+echo $item
+done
